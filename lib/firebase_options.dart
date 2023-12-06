@@ -44,39 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    authDomain: '',
-    storageBucket: '',
+    apiKey: 'AIzaSyDG6aleA0yaUbz7D2qBK6MQVK2V33KSsUo',
+    appId: '1:153243177053:web:15d7de801788ab6a9f7db4',
+    messagingSenderId: '153243177053',
+    projectId: 'taternak-45ab3',
+    authDomain: 'taternak-45ab3.firebaseapp.com',
+    storageBucket: 'taternak-45ab3.appspot.com',
+    measurementId: 'G-00LM9JLTK3',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    storageBucket: '',
+    apiKey: 'AIzaSyDrYEcn6pVHzmKtqC4hsZFkpTXWffb1zK8',
+    appId: '1:153243177053:android:3d8fd0744aa52df99f7db4',
+    messagingSenderId: '153243177053',
+    projectId: 'taternak-45ab3',
+    storageBucket: 'taternak-45ab3.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    storageBucket: '',
-    iosClientId: '',
-    iosBundleId: '',
+    apiKey: 'AIzaSyBPOKojxDGYJRcRkVggUb84qO7q9AZ-9Q0',
+    appId: '1:153243177053:ios:0f85de992fd44f6a9f7db4',
+    messagingSenderId: '153243177053',
+    projectId: 'taternak-45ab3',
+    storageBucket: 'taternak-45ab3.appspot.com',
+    iosBundleId: 'com.example',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: '',
-    appId: '',
-    messagingSenderId: '',
-    projectId: '',
-    storageBucket: '',
-    iosClientId: '',
-    iosBundleId: '',
+    apiKey: 'AIzaSyBPOKojxDGYJRcRkVggUb84qO7q9AZ-9Q0',
+    appId: '1:153243177053:ios:0156b85fb712f3c79f7db4',
+    messagingSenderId: '153243177053',
+    projectId: 'taternak-45ab3',
+    storageBucket: 'taternak-45ab3.appspot.com',
+    iosBundleId: 'com.example.RunnerTests',
   );
 }

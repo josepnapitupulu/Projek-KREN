@@ -203,6 +203,7 @@ class _ChatPageState extends State<ChatPage> {
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.light,
           title: const Text('Chat'),
+          backgroundColor: const Color(0xFF338309),
         ),
         body: StreamBuilder<types.Room>(
           initialData: widget.room,

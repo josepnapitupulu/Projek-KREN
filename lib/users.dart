@@ -6,8 +6,27 @@ import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 import 'chat.dart';
 import 'util.dart';
 
-class UsersPage extends StatelessWidget {
-  const UsersPage({super.key});
+class UsersPage extends StatefulWidget {
+  const UsersPage({Key? key}) : super(key: key);
+
+  @override
+  _UsersPageState createState() => _UsersPageState();
+}
+
+class _UsersPageState extends State<UsersPage> {
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    super.initState();
+    _searchController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   Widget _buildAvatar(types.User user) {
     final color = getUserAvatarNameColor(user);
@@ -44,51 +63,87 @@ class UsersPage extends StatelessWidget {
     );
   }
 
+  void _searchUsers(String query) {
+    // Implement your search logic here
+    // You may want to filter the users based on the query
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          title: const Text('Users'),
+          title: const Text('Chat'),
+          backgroundColor: const Color(0xFF338309),
         ),
-        body: StreamBuilder<List<types.User>>(
-          stream: FirebaseChatCore.instance.users(),
-          initialData: const [],
-          builder: (context, snapshot) {
-            if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return Container(
-                alignment: Alignment.center,
-                margin: const EdgeInsets.only(
-                  bottom: 200,
-                ),
-                child: const Text('No users'),
-              );
-            }
-
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              itemBuilder: (context, index) {
-                final user = snapshot.data![index];
-
-                return GestureDetector(
-                  onTap: () {
-                    _handlePressed(user, context);
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 8,
-                    ),
-                    child: Row(
-                      children: [
-                        _buildAvatar(user),
-                        Text(getUserName(user)),
-                      ],
+        body: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SizedBox(
+                height: 50, // Sesuaikan tinggi TextField sesuai kebutuhan
+                child: TextField(
+                  controller: _searchController,
+                  onChanged: _searchUsers,
+                  decoration: InputDecoration(
+                    hintText: 'Cari',
+                    filled: true,
+                    fillColor: Color(0xFF53DB71), 
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                );
-              },
-            );
-          },
+                ),
+              ),
+              const SizedBox(height: 16),
+              Divider(
+                thickness: 1, // Atur ketebalan garis sesuai kebutuhan
+                color: Colors.grey, // Atur warna garis sesuai kebutuhan
+              ),
+              StreamBuilder<List<types.User>>(
+                stream: FirebaseChatCore.instance.users(),
+                initialData: const [],
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return Container(
+                      alignment: Alignment.center,
+                      margin: const EdgeInsets.only(
+                        bottom: 200,
+                      ),
+                      child: const Text('No users'),
+                    );
+                  }
+
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        final user = snapshot.data![index];
+
+                        return GestureDetector(
+                          onTap: () {
+                            _handlePressed(user, context);
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            child: Row(
+                              children: [
+                                _buildAvatar(user),
+                                Text(getUserName(user)),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       );
 }
