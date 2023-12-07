@@ -47,6 +47,13 @@ dependencies:
   mime: ^1.0.4
   open_filex: ^4.3.2
   path_provider: ^2.0.15
+  get: ^4.6.5
+  connectivity_plus: ^2.3.6
+  shared_preferences: ^2.0.15
+  cached_network_image: ^3.2.1
+  flutter_svg: ^1.1.6
+  google_sign_in: ^5.0.7
+  intl: ^0.18.0
 
 dev_dependencies:
   dart_code_metrics: ^5.7.3
@@ -69,6 +76,31 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets: 
+    - assets/
+    - assets/images/
+  fonts: 
+    - family: Patrick Hand
+      fonts: 
+        - asset: assets/fonts/PatrickHandRegular.ttf
+          weight: 400
+    - family: Sonsie One
+      fonts: 
+        - asset: assets/fonts/SonsieOneRegular.ttf
+          weight: 400
+    - family: Pompiere
+      fonts: 
+        - asset: assets/fonts/PompiereRegular.ttf
+          weight: 400
+    - family: Passion One
+      fonts: 
+        - asset: assets/fonts/PassionOneRegular.ttf
+          weight: 400
+    - family: Poiret One
+      fonts: 
+        - asset: assets/fonts/PoiretOneRegular.ttf
+          weight: 400
 
   # To add assets to your application, add an assets section, like this:
   # assets:
