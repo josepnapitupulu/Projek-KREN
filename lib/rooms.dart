@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_chat_types/flutter_chat_types.dart' as types;
 import 'package:flutter_firebase_chat_core/flutter_firebase_chat_core.dart';
 
-import 'package:example/presentation/beranda_screen/beranda_screen.dart';
+import 'presentation/beranda_screen/controller/beranda_controller.dart';
 import 'package:example/core/app_export.dart';
 import 'package:example/presentation/cari_page/cari_page.dart';
 import 'package:example/widgets/app_bar/appbar_leading_circleimage.dart';
@@ -100,47 +100,46 @@ class _RoomsPageState extends State<RoomsPage> {
       return Container();
     }
 
-   return Scaffold(
-          appBar: AppBar(
-            backgroundColor: Color(0xFF338309),
-            actions: [
-              _user != null
-                  ? IconButton(
-                      icon: const Icon(Icons.message),
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            fullscreenDialog: true,
-                            builder: (context) => const UsersPage(),
-                          ),
-                        );
-                      },
-                    )
-                  : Container(),
-              _user != null
-                  ? IconButton(
-                      icon: const Icon(Icons.logout),
-                      onPressed: logout,
-                    )
-                  : Container(),
-            ],
-            leading: AppbarLeadingCircleimage(
-              imagePath: ImageConstant.imgEllipse2,
-              margin: EdgeInsets.only(left: 10.h, top: 0.v),
-              imageSize: Size(24.0, 24.0),
-            ),
-            title: AppbarSubtitleFive(
-              text: "lbl_taternak".tr,
-              margin: EdgeInsets.only(left: 14.h),
-            ),
-            // SystemUiOverlayStyle and title are optional properties 
-            // You can include them if needed
-            systemOverlayStyle: SystemUiOverlayStyle.light,
-            // title: const Text('Rooms'),
-          ),
-          body: _user == null
-          ? 
-          Container(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF338309),
+        actions: [
+          _user != null
+              ? IconButton(
+                  icon: const Icon(Icons.message),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        fullscreenDialog: true,
+                        builder: (context) => const UsersPage(),
+                      ),
+                    );
+                  },
+                )
+              : Container(),
+          _user != null
+              ? IconButton(
+                  icon: const Icon(Icons.logout),
+                  onPressed: logout,
+                )
+              : Container(),
+        ],
+        leading: AppbarLeadingCircleimage(
+          imagePath: ImageConstant.imgEllipse2,
+          margin: EdgeInsets.only(left: 10.h, top: 0.v),
+          imageSize: Size(24.0, 24.0),
+        ),
+        title: AppbarSubtitleFive(
+          text: "lbl_taternak".tr,
+          margin: EdgeInsets.only(left: 14.h),
+        ),
+        // SystemUiOverlayStyle and title are optional properties
+        // You can include them if needed
+        systemOverlayStyle: SystemUiOverlayStyle.light,
+        // title: const Text('Rooms'),
+      ),
+      body: _user == null
+          ? Container(
               alignment: Alignment.center,
               margin: const EdgeInsets.only(
                 bottom: 200,
@@ -148,14 +147,15 @@ class _RoomsPageState extends State<RoomsPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                    Image.asset(
+                  Image.asset(
                     'logo.jpeg', // Replace with your image asset path
                     height: 150,
                     width: 150,
                     fit: BoxFit.contain,
                   ),
                   SizedBox(height: 20),
-                  const Text('Sebelum mengakses aplikasi kami silahkan login terlebih dahulu'),
+                  const Text(
+                      'Sebelum mengakses aplikasi kami silahkan login terlebih dahulu'),
                   SizedBox(height: 20),
                   TextButton(
                     onPressed: () {
@@ -167,9 +167,12 @@ class _RoomsPageState extends State<RoomsPage> {
                       );
                     },
                     style: TextButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 16.0), // Sesuaikan padding sesuai kebutuhan
+                      padding: EdgeInsets.symmetric(
+                          horizontal:
+                              16.0), // Sesuaikan padding sesuai kebutuhan
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8.0), // Sesuaikan radius border sesuai kebutuhan
+                        borderRadius: BorderRadius.circular(
+                            8.0), // Sesuaikan radius border sesuai kebutuhan
                       ),
                     ),
                     child: const Text('Login'),
@@ -177,229 +180,244 @@ class _RoomsPageState extends State<RoomsPage> {
                 ],
               ),
             )
-          : 
-          SafeArea(
-        child: Scaffold(
-            body: SizedBox(
-                width: double.maxFinite,
-                child: Column(children: [
-                  // _buildAtas(),
-                  SizedBox(height: 13.v),
-                  Expanded(
-                      child: SingleChildScrollView(
-                          child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                        GestureDetector(
-                            onTap: () {
-                              onTapNamaTernak();
-                            },
-                            // konten
-                            child: Padding(
-                                padding: EdgeInsets.only(left: 17.h),
-                                child: Row(children: [
-                                  Container(
-                                      height: 25.adaptSize,
-                                      width: 25.adaptSize,
-                                      decoration: AppDecoration.fillGreenA
-                                          .copyWith(
-                                              borderRadius: BorderRadiusStyle
-                                                  .roundedBorder12),
-                                      child: CustomImageView(
-                                          imagePath:
-                                              ImageConstant.imgImage2025x25,
-                                          height: 25.adaptSize,
-                                          width: 25.adaptSize,
-                                          alignment: Alignment.center)),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                        left: 12.h, top: 5.v, bottom: 2.v),
-                                    child: Text(
-                                      "msg_ternak_sapi_kita".tr,
+          : SafeArea(
+              child: Scaffold(
+                  body: SizedBox(
+                      width: double.maxFinite,
+                      child: Column(children: [
+                        // _buildAtas(),
+                        SizedBox(height: 13.v),
+                        Expanded(
+                            child: SingleChildScrollView(
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    onTapNamaTernak();
+                                  },
+                                  // konten
+                                  child: Padding(
+                                      padding: EdgeInsets.only(left: 17.h),
+                                      child: Row(children: [
+                                        Container(
+                                            height: 25.adaptSize,
+                                            width: 25.adaptSize,
+                                            decoration: AppDecoration.fillGreenA
+                                                .copyWith(
+                                                    borderRadius:
+                                                        BorderRadiusStyle
+                                                            .roundedBorder12),
+                                            child: CustomImageView(
+                                                imagePath: ImageConstant
+                                                    .imgImage2025x25,
+                                                height: 25.adaptSize,
+                                                width: 25.adaptSize,
+                                                alignment: Alignment.center)),
+                                        Padding(
+                                          padding: EdgeInsets.only(
+                                              left: 12.h,
+                                              top: 5.v,
+                                              bottom: 2.v),
+                                          child: Text(
+                                            "msg_ternak_sapi_kita".tr,
+                                            style: theme.textTheme?.bodySmall
+                                                    ?.copyWith(
+                                                  fontWeight: FontWeight.bold,
+                                                ) ??
+                                                TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                          ),
+                                        )
+                                      ]))),
+                              SizedBox(height: 11.v),
+                              CustomImageView(
+                                  imagePath: ImageConstant.imgRectangle47,
+                                  height: 329.v,
+                                  width: 414.h),
+                              SizedBox(height: 12.v),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                      width: 380.h,
+                                      margin: EdgeInsets.only(
+                                          left: 16.h, right: 17.h),
+                                      // child: Text("msg_ternak_sapi_kita2".tr,
+                                      //     maxLines: 4,
+                                      //     overflow: TextOverflow.ellipsis,
+                                      //     textAlign: TextAlign.justify,
+                                      //     style: CustomTextStyles.bodySmall_2
+                                      //         .copyWith(height: 1.42))
+                                      child: RichText(
+                                          text: TextSpan(children: [
+                                            TextSpan(
+                                                text: "Ternak Sapi Kita ".tr,
+                                                style: CustomTextStyles
+                                                    .bodySmallPassionOne),
+                                            TextSpan(
+                                                text:
+                                                    "Dalam pemandangan yang sederhana, sapi menjadi perwakilan damai yang tak tergoyahkan. Dengan kehadiran yang kokoh dan tatapan lembutnya, hewan yang sederhana ini mengajarkan tentang ketenangan, kebijaksanaan, dan keindahan yang terkandung dalam kehidupan yang penuh kesederhanaan"
+                                                        .tr,
+                                                style: CustomTextStyles
+                                                    .bodySmall_1)
+                                          ]),
+                                          textAlign: TextAlign.justify))),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 17.h),
+                                  child: Row(children: [
+                                    Container(
+                                        height: 25.adaptSize,
+                                        width: 25.adaptSize,
+                                        decoration: AppDecoration.fillGreenA
+                                            .copyWith(
+                                                borderRadius: BorderRadiusStyle
+                                                    .roundedBorder12),
+                                        child: CustomImageView(
+                                            imagePath:
+                                                ImageConstant.imgImage201,
+                                            height: 25.adaptSize,
+                                            width: 25.adaptSize,
+                                            alignment: Alignment.center)),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 4.h, top: 7.v, bottom: 6.v),
+                                        child: Text("msg_tambahkan_komentar".tr,
+                                            style: CustomTextStyles
+                                                .bodySmallPoiretOne))
+                                  ])),
+                              SizedBox(height: 7.v),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 17.h),
+                                  child: Text("lbl_01_juni_2023".tr,
                                       style:
-                                          theme.textTheme?.bodySmall?.copyWith(
+                                          CustomTextStyles.bodySmallPompiere)),
+                              SizedBox(height: 22.v),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 17.h),
+                                  child: Row(children: [
+                                    CustomImageView(
+                                        imagePath:
+                                            ImageConstant.imgEllipse225x25,
+                                        height: 25.adaptSize,
+                                        width: 25.adaptSize,
+                                        radius: BorderRadius.circular(12.h)),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 12.h, top: 5.v, bottom: 2.v),
+                                        child: Text(
+                                          "lbl_ternak_bahagia".tr,
+                                          style: theme.textTheme?.bodySmall
+                                                  ?.copyWith(
                                                 fontWeight: FontWeight.bold,
                                               ) ??
                                               TextStyle(
                                                   fontWeight: FontWeight.bold),
-                                    ),
-                                  )
-                                ]))),
-                        SizedBox(height: 11.v),
-                        CustomImageView(
-                            imagePath: ImageConstant.imgRectangle47,
-                            height: 329.v,
-                            width: 414.h),
-                        SizedBox(height: 12.v),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                                width: 380.h,
-                                margin:
-                                    EdgeInsets.only(left: 16.h, right: 17.h),
-                                // child: Text("msg_ternak_sapi_kita2".tr,
-                                //     maxLines: 4,
-                                //     overflow: TextOverflow.ellipsis,
-                                //     textAlign: TextAlign.justify,
-                                //     style: CustomTextStyles.bodySmall_2
-                                //         .copyWith(height: 1.42))
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "Ternak Sapi Kita ".tr,
-                                          style: CustomTextStyles
-                                              .bodySmallPassionOne),
-                                      TextSpan(
-                                          text:
-                                              "Dalam pemandangan yang sederhana, sapi menjadi perwakilan damai yang tak tergoyahkan. Dengan kehadiran yang kokoh dan tatapan lembutnya, hewan yang sederhana ini mengajarkan tentang ketenangan, kebijaksanaan, dan keindahan yang terkandung dalam kehidupan yang penuh kesederhanaan"
-                                                  .tr,
-                                          style: CustomTextStyles.bodySmall_1)
-                                    ]),
-                                    textAlign: TextAlign.justify))),
-                        Padding(
-                            padding: EdgeInsets.only(left: 17.h),
-                            child: Row(children: [
-                              Container(
-                                  height: 25.adaptSize,
-                                  width: 25.adaptSize,
-                                  decoration: AppDecoration.fillGreenA.copyWith(
-                                      borderRadius:
-                                          BorderRadiusStyle.roundedBorder12),
-                                  child: CustomImageView(
-                                      imagePath: ImageConstant.imgImage201,
-                                      height: 25.adaptSize,
-                                      width: 25.adaptSize,
-                                      alignment: Alignment.center)),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 4.h, top: 7.v, bottom: 6.v),
-                                  child: Text("msg_tambahkan_komentar".tr,
-                                      style:
-                                          CustomTextStyles.bodySmallPoiretOne))
-                            ])),
-                        SizedBox(height: 7.v),
-                        Padding(
-                            padding: EdgeInsets.only(left: 17.h),
-                            child: Text("lbl_01_juni_2023".tr,
-                                style: CustomTextStyles.bodySmallPompiere)),
-                        SizedBox(height: 22.v),
-                        Padding(
-                            padding: EdgeInsets.only(left: 17.h),
-                            child: Row(children: [
+                                        ))
+                                  ])),
+                              SizedBox(height: 11.v),
                               CustomImageView(
-                                  imagePath: ImageConstant.imgEllipse225x25,
-                                  height: 25.adaptSize,
-                                  width: 25.adaptSize,
-                                  radius: BorderRadius.circular(12.h)),
+                                  imagePath:
+                                      ImageConstant.imgRectangle47329x414,
+                                  height: 329.v,
+                                  width: 414.h),
+                              SizedBox(height: 11.v),
+                              Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                      width: 380.h,
+                                      margin: EdgeInsets.symmetric(
+                                          horizontal: 17.h),
+                                      child: RichText(
+                                          text: TextSpan(children: [
+                                            TextSpan(
+                                                text: "lbl_ternak_xxx".tr,
+                                                style: CustomTextStyles
+                                                    .bodySmallPassionOne),
+                                            TextSpan(
+                                                text:
+                                                    "msg_lorem_ipsum_dolor".tr,
+                                                style: CustomTextStyles
+                                                    .bodySmall_1)
+                                          ]),
+                                          textAlign: TextAlign.justify))),
+                              SizedBox(height: 3.v),
                               Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 12.h, top: 5.v, bottom: 2.v),
-                                  child: Text(
-                                    "lbl_ternak_bahagia".tr,
-                                    style: theme.textTheme?.bodySmall?.copyWith(
-                                          fontWeight: FontWeight.bold,
-                                        ) ??
-                                        TextStyle(fontWeight: FontWeight.bold),
-                                  ))
-                            ])),
-                        SizedBox(height: 11.v),
-                        CustomImageView(
-                            imagePath: ImageConstant.imgRectangle47329x414,
-                            height: 329.v,
-                            width: 414.h),
-                        SizedBox(height: 11.v),
-                        Align(
-                            alignment: Alignment.center,
-                            child: Container(
-                                width: 380.h,
-                                margin: EdgeInsets.symmetric(horizontal: 17.h),
-                                child: RichText(
-                                    text: TextSpan(children: [
-                                      TextSpan(
-                                          text: "lbl_ternak_xxx".tr,
-                                          style: CustomTextStyles
-                                              .bodySmallPassionOne),
-                                      TextSpan(
-                                          text: "msg_lorem_ipsum_dolor".tr,
-                                          style: CustomTextStyles.bodySmall_1)
-                                    ]),
-                                    textAlign: TextAlign.justify))),
-                        SizedBox(height: 3.v),
-                        Padding(
-                            padding: EdgeInsets.only(left: 17.h),
-                            child: Row(children: [
-                              Container(
-                                  height: 25.adaptSize,
-                                  width: 25.adaptSize,
-                                  decoration: BoxDecoration(
-                                      color: appTheme.greenA700,
-                                      borderRadius:
-                                          BorderRadius.circular(12.h))),
+                                  padding: EdgeInsets.only(left: 17.h),
+                                  child: Row(children: [
+                                    Container(
+                                        height: 25.adaptSize,
+                                        width: 25.adaptSize,
+                                        decoration: BoxDecoration(
+                                            color: appTheme.greenA700,
+                                            borderRadius:
+                                                BorderRadius.circular(12.h))),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 4.h, top: 5.v, bottom: 5.v),
+                                        child: Text("msg_tambahkan_komentar".tr,
+                                            textAlign: TextAlign.justify,
+                                            style: CustomTextStyles
+                                                .bodySmallPoiretOne))
+                                  ])),
+                              SizedBox(height: 6.v),
                               Padding(
-                                  padding: EdgeInsets.only(
-                                      left: 4.h, top: 5.v, bottom: 5.v),
-                                  child: Text("msg_tambahkan_komentar".tr,
+                                  padding: EdgeInsets.only(left: 17.h),
+                                  child: Text("lbl_01_juni_2023".tr,
                                       textAlign: TextAlign.justify,
                                       style:
-                                          CustomTextStyles.bodySmallPoiretOne))
-                            ])),
-                        SizedBox(height: 6.v),
-                        Padding(
-                            padding: EdgeInsets.only(left: 17.h),
-                            child: Text("lbl_01_juni_2023".tr,
-                                textAlign: TextAlign.justify,
-                                style: CustomTextStyles.bodySmallPompiere))
-                      ])))
-                ])),
-            bottomNavigationBar: _buildBottomBar()
+                                          CustomTextStyles.bodySmallPompiere))
+                            ])))
+                      ])),
+                  bottomNavigationBar: _buildBottomBar()),
             ),
-          ),
-          // StreamBuilder<List<types.Room>>(
-          //     stream: FirebaseChatCore.instance.rooms(),
-          //     initialData: const [],
-          //     builder: (context, snapshot) {
-          //       if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          //         return Container(
-          //           alignment: Alignment.center,
-          //           margin: const EdgeInsets.only(
-          //             bottom: 200,
-          //           ),
-          //           child: const Text('No rooms'),
-          //         );
-          //       }
+      // StreamBuilder<List<types.Room>>(
+      //     stream: FirebaseChatCore.instance.rooms(),
+      //     initialData: const [],
+      //     builder: (context, snapshot) {
+      //       if (!snapshot.hasData || snapshot.data!.isEmpty) {
+      //         return Container(
+      //           alignment: Alignment.center,
+      //           margin: const EdgeInsets.only(
+      //             bottom: 200,
+      //           ),
+      //           child: const Text('No rooms'),
+      //         );
+      //       }
 
-          //       return ListView.builder(
-          //         itemCount: snapshot.data!.length,
-          //         itemBuilder: (context, index) {
-          //           final room = snapshot.data![index];
+      //       return ListView.builder(
+      //         itemCount: snapshot.data!.length,
+      //         itemBuilder: (context, index) {
+      //           final room = snapshot.data![index];
 
-          //           return GestureDetector(
-          //             onTap: () {
-          //               Navigator.of(context).push(
-          //                 MaterialPageRoute(
-          //                   builder: (context) => ChatPage(
-          //                     room: room,
-          //                   ),
-          //                 ),
-          //               );
-          //             },
-          //             child: Container(
-          //               padding: const EdgeInsets.symmetric(
-          //                 horizontal: 16,
-          //                 vertical: 8,
-          //               ),
-          //               child: Row(
-          //                 children: [
-          //                   _buildAvatar(room),
-          //                   Text(room.name ?? ''),
-          //                 ],
-          //               ),
-          //             ),
-          //           );
-          //         },
-          //       );
-          //     },
-          //   ),
+      //           return GestureDetector(
+      //             onTap: () {
+      //               Navigator.of(context).push(
+      //                 MaterialPageRoute(
+      //                   builder: (context) => ChatPage(
+      //                     room: room,
+      //                   ),
+      //                 ),
+      //               );
+      //             },
+      //             child: Container(
+      //               padding: const EdgeInsets.symmetric(
+      //                 horizontal: 16,
+      //                 vertical: 8,
+      //               ),
+      //               child: Row(
+      //                 children: [
+      //                   _buildAvatar(room),
+      //                   Text(room.name ?? ''),
+      //                 ],
+      //               ),
+      //             ),
+      //           );
+      //         },
+      //       );
+      //     },
+      //   ),
     );
   }
   // Widget _buildAtas() {
@@ -486,20 +504,19 @@ class _RoomsPageState extends State<RoomsPage> {
       case BottomBarEnum.Akun:
         return AppRoutes.profileOneScreen;
       default:
-         return AppRoutes.berandaScreen;
+        return RoomsPage().runtimeType.toString();
     }
   }
 
-  
   ///Handling page based on route
-  Widget getCurrentPage(String currentRoute) {
-    switch (currentRoute) {
-      case AppRoutes.berandaScreen:
-        return BerandaScreen();
-      default:
-        return DefaultWidget();
-    }
-  }
+  // Widget getCurrentPage(String currentRoute) {
+  //   switch (currentRoute) {
+  //     case AppRoutes.berandaScreen:
+  //       return RoomsPages();
+  //     default:
+  //       return DefaultWidget();
+  //   }
+  // }
 
   /// Navigates to the chatOneScreen when the action is triggered.
   onTapImgChatChat() {

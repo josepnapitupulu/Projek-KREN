@@ -14,20 +14,19 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(
-    GetMaterialApp(  // Use GetMaterialApp instead of MaterialApp
-      title: 'Taternak Chat',
-      debugShowCheckedModeBanner: false,
-      theme: theme,
-      translations: AppLocalization(),  // Provide your localization instance
-      locale: Get.deviceLocale,
-      fallbackLocale: Locale('en', 'US'),
-      initialBinding: InitialBindings(),
-      initialRoute: AppRoutes.initialRoute,
-      // getPages: AppRoutes.pages,
-      home: const RoomsPage(),
-    )
-  );
+  runApp(GetMaterialApp(
+    // Use GetMaterialApp instead of MaterialApp
+    title: 'Taternak Chat',
+    debugShowCheckedModeBanner: false,
+    theme: theme,
+    translations: AppLocalization(), // Provide your localization instance
+    locale: Get.deviceLocale,
+    fallbackLocale: Locale('en', 'US'),
+    initialBinding: InitialBindings(),
+    initialRoute: AppRoutes.initialRoute,
+    home: const RoomsPage(),
+    getPages: AppRoutes.pages,
+  ));
 //   await Firebase.initializeApp(
 //     options: DefaultFirebaseOptions.currentPlatform,
 //   );

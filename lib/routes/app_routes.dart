@@ -132,11 +132,13 @@ class AppRoutes {
 
   static const String tambahPostinganScreen = '/tambah_postingan_screen';
 
-  static const String editProfileBerandaOneScreen = '/edit_profile_beranda_one_screen';
+  static const String editProfileBerandaOneScreen =
+      '/edit_profile_beranda_one_screen';
 
   static const String akunPeternakScreen = '/akun_peternak_screen';
 
-  static const String editProfileBerandaTwoScreen = '/edit_profile_beranda_two_screen';
+  static const String editProfileBerandaTwoScreen =
+      '/edit_profile_beranda_two_screen';
 
   static const String editProfileBerandaScreen = '/edit_profile_beranda_screen';
 
@@ -164,7 +166,8 @@ class AppRoutes {
 
   static const String profileTwoPage = '/profile_two_page';
 
-  static const String profileTwoTabContainerScreen = '/profile_two_tab_container_screen';
+  static const String profileTwoTabContainerScreen =
+      '/profile_two_tab_container_screen';
 
   static const String profileScreen = '/profile_screen';
 
@@ -188,7 +191,8 @@ class AppRoutes {
 
   static const String chatPersonalScreen = '/chat_personal_screen';
 
-  static const String keranjangProdukPeternakanScreen = '/keranjang_produk_peternakan_screen';
+  static const String keranjangProdukPeternakanScreen =
+      '/keranjang_produk_peternakan_screen';
 
   static const String checkoutScreen = '/checkout_screen';
 
@@ -198,7 +202,8 @@ class AppRoutes {
 
   static const String detailKomunitasScreen = '/detail_komunitas_screen';
 
-  static const String keranjangPeternakanScreen = '/keranjang_peternakan_screen';
+  static const String keranjangPeternakanScreen =
+      '/keranjang_peternakan_screen';
 
   static const String belumBayarScreen = '/belum_bayar_screen';
 
@@ -229,7 +234,6 @@ class AppRoutes {
   static const String initialRoute = '/initialRoute';
 
   static List<GetPage> pages = [
-
     GetPage(
       name: loginScreen,
       page: () => LoginScreen(),
