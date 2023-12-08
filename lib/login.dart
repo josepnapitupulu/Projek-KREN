@@ -222,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
                         fontWeight: FontWeight.bold,
                       ),
                       padding: EdgeInsets.symmetric(
-                        vertical: 20,
+                        vertical: 30,
                         horizontal: 24,
                       ),
                     ),
@@ -287,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                       ),
                       padding: EdgeInsets.symmetric(
                         vertical:
-                            20, // Sesuaikan dengan ukuran vertikal yang diinginkan
+                            30, // Sesuaikan dengan ukuran vertikal yang diinginkan
                         horizontal:
                             24, // Sesuaikan dengan ukuran horizontal yang diinginkan
                       ),

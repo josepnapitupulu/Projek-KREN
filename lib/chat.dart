@@ -202,7 +202,13 @@ class _ChatPageState extends State<ChatPage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           systemOverlayStyle: SystemUiOverlayStyle.light,
-          title: const Text('Chat'),
+          title: const Text(
+            'Chat',
+            style: TextStyle(
+              color: Colors.white,
+              decoration: TextDecoration.underline,
+            ),
+          ),
           backgroundColor: const Color(0xFF338309),
         ),
         body: StreamBuilder<types.Room>(
